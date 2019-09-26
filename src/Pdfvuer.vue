@@ -40,12 +40,12 @@ function createLoadingTask(src, options) {
 
 		this.fetch = function(query) {
 
-			return import('raw-loader!pdfjs-dist/cmaps/'+query.name+'.bcmap' /* webpackChunkName: "noprefetch-[request]" */)
+			return import('./buffer-loader!pdfjs-dist/cmaps/'+query.name+'.bcmap' /* webpackChunkName: "noprefetch-[request]" */)
 			.then(function(bcmap) {
 
 				return {
-					cMapData: bcmap,
-					compressionType: CMapCompressionType.BINARY,
+					cMapData: bcmap.default,
+					compressionType: pdfjsLib.CMapCompressionType.BINARY,
 				};
 			});
 		}
